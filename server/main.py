@@ -38,13 +38,13 @@ def hello():
 
 @app.on_event("startup")
 def generate_pickle():
-    if os.path.exists("***REMOVED***/characters.pkl"):
+    if os.path.exists("server/assets/characters.pkl"):
         return
-    df = pd.read_excel("***REMOVED***/characters.xlsx")
+    df = pd.read_excel("server/assets/characters.xlsx")
     for column in df.columns:
         df[column] = df[column].apply(lambda x: str(x).replace(",", ""))
     df["id"] = range(len(df))
     df.index = df["id"]
 
     df["embedding"] = df["imageDescription"].apply(get_image_embedding)
-    df.to_pickle("***REMOVED***/characters.pkl")
+    df.to_pickle("server/assets/characters.pkl")

@@ -27,7 +27,7 @@ def calculate_similarity(embedding1, embedding2):
 
 
 def return_result(image_features: List[float], image_url: str, keyword_list: List[dict]):
-    df = pd.read_pickle("***REMOVED***/characters.pkl")
+    df = pd.read_pickle("server/assets/characters.pkl")
     df["score"] = df["embedding"].apply(lambda x: calculate_similarity(x, image_features))
     df = df[["id", "name", "anime_name", "mbti", "genre", "job", "category", "personality", "gender", "description", "score"]]
 

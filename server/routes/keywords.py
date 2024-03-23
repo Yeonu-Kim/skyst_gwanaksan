@@ -8,7 +8,7 @@ router = APIRouter()
 
 @router.post("/")
 async def calculate_keywords(user_keywords: Keywords):
-    df = pd.read_pickle("***REMOVED***/characters.pkl")
+    df = pd.read_pickle("server/assets/characters.pkl")
     df.drop(columns=["embedding"], inplace=True)
     df["score"] = pd.Series([0] * len(df), index=df.index)
     for field in Keywords.model_fields:
