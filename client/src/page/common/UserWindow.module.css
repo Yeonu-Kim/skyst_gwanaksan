@@ -68,3 +68,39 @@
     background-color: black;
     background-image: url('../../../public/images/loading_gof.gif');
 }
+
+.blind {
+    display: none;
+}
+
+.filename {
+    display: inline-block;
+    color: black;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.upload_btn {
+    display: none;
+}
+
+.file_upload_wrap {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: end;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+.img {
+    width: 280px;
+    margin: auto;
+}
+
+.img_wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}

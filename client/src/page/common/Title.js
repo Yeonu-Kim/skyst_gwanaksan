@@ -13,7 +13,7 @@ const Title = ({content}) => {
 const SubTitle = ({content}) => {
     return (
       <div className={styles.subtitle}>
-        <span className={styles.english}>{content}</span>
+        <span>{content}</span>
       </div>
     );
   }

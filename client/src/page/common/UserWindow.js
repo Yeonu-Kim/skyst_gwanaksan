@@ -1,7 +1,8 @@
 import React, { useState, useEffect} from "react"
+import { useNavigate } from "react-router-dom"
+import { SendButton } from './Button';
 import styles from "./UserWindow.module.css"
-
-import styles from "./Button.module.css"
+import button from './Button.module.css'
 
 function WindowHeader() {
     console.log("rendered!")
@@ -14,31 +15,29 @@ function WindowHeader() {
 function WindowLoading () {
     return (
         <div className={styles.loading}>
-            <span className={styles.loading_ment}>Loading...</span>
+            <span className={styles.loading_ment}>Loading... (30초 정도 소요) </span>
         </div>
     );
 }
 
 function WindowResult ({ imageUrl }) {
     const keywordList = JSON.parse(window.sessionStorage.getItem("keyword_list"));
-    const sendFaceData = (image, keywordList) => {
-        const data = {
-            // image 작성 필요
-            "keywordList": keywordList
-        }
 
-        fetch('http://ec2-34-228-60-199.compute-1.amazonaws.com/api/image/image', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            },
-            body: JSON.stringify(data)
-        })
+    const navigation = useNavigate();
+
+    const redirectResult = () => {
+        navigation('/result');
+    } 
+
+    const data = {
+        "image": imageUrl,
+        "keyword_list": keywordList
     }
+
     return (
-        <div>
-            <img src={imageUrl} />
-            {/* <SendButton text={"완전 좋아!❤️"}/> */}
+        <div className={styles.img_wrap}>
+            <img className={styles.img} src={imageUrl} />
+            <SendButton text={"완전 좋아!❤️"} onClickFunction={redirectResult}/>
         </div>
     )
 }
@@ -77,7 +76,10 @@ function UploadWindow ({ imageUrl, setImageUrl }) {
           })
           .then(data => {
               setImageUrl(data.image_url);
+              window.sessionStorage.setItem(imageUrl);
+              window.sessionStorage.setItem(data.scores);
               console.log(imageUrl);
+              console.log(data.scores);
           })
           .catch(error => {
               console.log(error);
@@ -87,10 +89,10 @@ function UploadWindow ({ imageUrl, setImageUrl }) {
     function UploadInput () {
         return (
             <div>
-                <form onSubmit={handleClick}>
-                    <label className={styles["button"]} htmlFor="file">이미지 파일 선택</label>
-                    <input type="file" id="file" onChange={handleFileChange} accept=".jpg, .jpeg, .png" style={{opacity: 0}}/>
-                    <button>Submit</button>
+                <form className={styles.file_upload_wrap} onSubmit={handleClick}>
+                    <label className={styles.filename} htmlFor="file">이미지 파일 선택</label>
+                    <input className={styles.upload_btn} type="file" id="file" onChange={handleFileChange} accept=".jpg, .jpeg, .png" style={{opacity: 0}}/>
+                    <button className={styles.send_btn}>Submit</button>
                 </form>
             </div>
         );
@@ -140,6 +142,8 @@ function DiffusionWindow ({ imageUrl, setImageUrl }) {
         })
         .then(data => {
             setImageUrl(data.image_url);
+            window.sessionStorage.setItem("image_url", imageUrl);
+            window.sessionStorage.setItem("scores", data.scores);
             console.log(imageUrl);
         })
         .catch(error => {
