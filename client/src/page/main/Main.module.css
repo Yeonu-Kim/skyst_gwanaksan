@@ -21,15 +21,7 @@
         width: 80%; 
         gap: 10rem; 
     }
-    .main_background {
-        background-image: url('../../../public/images/main_background.png');
-        background-size: cover; 
-        background-position: center; 
-        height: 100vh; 
-        width: 100vw; 
-        position: fixed; 
-        top: 0;
-        left: 0;
-        z-index: -1; 
-    }
+    .main_background{
+        background-size: 100vw 100%;
+    } 
 }

@@ -21,7 +21,7 @@ const Result = () => {
         const [descriptions, setDescriptions] = useState([]);
         const [keywords, setKeywords] = useState([]);
         useEffect(() => {
-            fetch('http://127.0.0.1:8000/image/prompt/?prompt=(...)')
+            fetch('http://ec2-34-228-60-199.compute-1.amazonaws.com/api/image/prompt')
             .then((res) => {
                 return res.json();
             })
