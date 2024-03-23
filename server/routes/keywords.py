@@ -8,10 +8,11 @@ router = APIRouter()
 
 @router.post("/")
 async def calculate_keywords(user_keywords: Keywords):
-    df = pd.read_csv("server/assets/characters.csv")
-    for column in df.columns:
-        df[column] = df[column].apply(lambda x: str(x).replace(",", ""))
-        df["score"] = 0
-        for field in Keywords.__fields__.keys():
-            df["score"] += df[field].apply(lambda x: x in dict(user_keywords)[field])
-    return df.sort_values("score", ascending=False).to_dict(orient="records")
+    df = pd.read_pickle("server/assets/characters.pkl")
+    df.drop(columns=["image", "embedding"], inplace=True)
+    df["score"] = pd.Series([0] * len(df), index=df.index)
+    for field in Keywords.model_fields:
+        df["score"] += df[field].apply(lambda x: x in getattr(user_keywords, field))
+    df = df[["id", "name", "anime_name", "score"]]
+    df = df.sort_values("score", ascending=False)
+    return df.to_dict(orient="records")
