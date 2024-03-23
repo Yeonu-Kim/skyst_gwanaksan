@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { SendButton } from './Button';
 import styles from "./UserWindow.module.css"
-import button from './Button.module.css'
 
 function WindowHeader() {
     console.log("rendered!")
@@ -32,10 +31,14 @@ function WindowLoading () {
 function WindowResult ({ imageUrl }) {
     const keywordList = JSON.parse(window.sessionStorage.getItem("keyword_list"));
 
-    const navigation = useNavigate();
+    const navigate = useNavigate();
+
+    if (keywordList === null) {
+        navigate('/');
+    }
 
     const redirectResult = () => {
-        navigation('/result');
+        navigate('/result');
     }
 
     const data = {
