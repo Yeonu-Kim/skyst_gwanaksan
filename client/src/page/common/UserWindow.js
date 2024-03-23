@@ -147,21 +147,21 @@ function DiffusionWindow ({ imageUrl, setImageUrl }) {
             },
             body: JSON.stringify(data)
         })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network error');
-                }
-                return response.json();
-            })
-            .then(data => {
-                setImageUrl(data.image_url);
-                window.sessionStorage.setItem("image_url", imageUrl);
-                window.sessionStorage.setItem("scores", data.scores);
-                console.log(imageUrl);
-            })
-            .catch(error => {
-                console.log(error);
-            })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network error');
+            }
+            return response.json();
+        })
+        .then(data => {
+            setImageUrl(data.image_url);
+            window.sessionStorage.setItem("image_url", imageUrl);
+            window.sessionStorage.setItem("scores", JSON.stringify(data.scores));
+            console.log("scores is", data.scores);
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
     return (
