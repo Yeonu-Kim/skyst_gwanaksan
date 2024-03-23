@@ -50,31 +50,24 @@
     padding-right: 3rem;
 }
 @media (min-width: 1024px) {
-    .header{
-        height: 10rem;
-    }
+
     
     .logo {
-        font-size: 3em;
+        font-size: 2em;
     }
       
       
-    .footer {
-        height: 12rem;
-    }
+
     .socialLinks{
         padding: 5rem;
     }
     .socialIcon {
         margin: 0 1rem; 
-        font-size: 4rem; 
     }
     .label {
-        font-size: 2.4rem;
         margin-right: 2rem; 
     }
     .team{
-        font-size: 2.4rem;
         padding-right: 6rem;
     }
 }

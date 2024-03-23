@@ -16,6 +16,7 @@ import { Button }  from '../common/Button';
 //   ];
 
 const Result = () => {
+        const [data, setData] = useState([]); 
         const [images, setImages] = useState([]);
         const [names, setNames] = useState([]);
         const [descriptions, setDescriptions] = useState([]);
@@ -26,7 +27,8 @@ const Result = () => {
                 return res.json();
             })
             .then((data) => {
-                setImages(data.image_url);
+                setData(data.scores);
+                setImages(data.scores.map(score => score.image_url));
                 setNames(data.scores.map(score => score.name));
                 setDescriptions(data.scores.map(score => score.description));
                 const firstItem = data.scores[0];
@@ -40,10 +42,9 @@ const Result = () => {
                 ]);
             });
         }, []);
-        // Preparing candidates data dynamically based on fetched data
-        const candidatesData = names.slice(1, 3).map((name, index) => ({
-            imageUrl: images[index + 1], // Corrects the index to match the sliced names
-            name,
+        const candidatesData = data.slice(1, 3).map(score => ({
+            imageUrl: score.image_url,
+            name: score.name,
         }));
     return (
         <div className={styles.resultContainer}>

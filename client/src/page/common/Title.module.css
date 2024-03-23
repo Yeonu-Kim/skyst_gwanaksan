@@ -36,31 +36,30 @@
 
 @media (min-width: 1024px) {
     .title{
-        font-size: 4.8rem;
+        font-size: 4rem;
         font-weight: 900;
         padding-bottom: 2rem;
     }
 
     .subtitle{
-        font-size: 2.4rem;
+        font-size: 2rem;
         font-weight: 900;
         padding-bottom: 3.6rem;
     }
 
     .paragraph{
-        font-size: 1.6rem;
+        font-size: 1rem;
         font-weight: 600;
     }
 
     .maintitle {
-        font-size: 6.4rem;
+        font-size: 4.4rem;
         font-weight: 900;
         padding-bottom: 1.6rem;
     }
 
     .mainparagraph {
-        font-size: 2.4rem;
+        font-size: 2rem;
         font-weight: 500;
-        font-size: 3.6rem;
     }
 }
