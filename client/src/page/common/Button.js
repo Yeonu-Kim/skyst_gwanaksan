@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Button.module.css'; 
   
-  const Button = ({text, onClickColor, originalColor}) => {
+  const Button = ({text, onClickColor='var(--highlight-pink)', originalColor='var(--primary-color)', onClickTextColor='var(--white-color)'}) => {
     const [isClicked, setIsClicked] = useState(false);
     const handleClick = () => {
       setIsClicked(current => !current); 
@@ -10,6 +10,7 @@ import styles from './Button.module.css';
     const buttonClasses = `${styles.button} ${isClicked ? styles.clicked : ''}`;
     const buttonStyle = {
       backgroundColor: isClicked ? onClickColor : originalColor,
+      color: isClicked ? onClickTextColor : 'black',
     };
     return (
       <button 
