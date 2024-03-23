@@ -20,9 +20,9 @@ const Keyword = () => {
         {
             "genre": [],
             "job": [],
-            "relationship": [],
+            "category": [],
             "personality": [],
-            "sex": [],
+            "gender": [],
             "mbti": [],
         }
     );
@@ -49,7 +49,7 @@ const Keyword = () => {
     const handleSendData = () => {
         console.log("click")
         console.log(JSON.stringify(selectedValues));
-        fetch('/api/keywords', {
+        fetch('http://ec2-34-228-60-199.compute-1.amazonaws.com/api/keywords', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -61,7 +61,12 @@ const Keyword = () => {
             if (!response.ok) {
                 throw new Error('Network error');
             }
-            navigate('/result');
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            window.sessionStorage.setItem('keyword_list', JSON.stringify(data));
+            navigate('/face');
         })
         .catch(error => {
             console.log(error);
@@ -114,11 +119,11 @@ const Keyword = () => {
                     <Button text={"괴도"} title={"job"} onClickFunction={handleButtonClick}/>
                 </ButtonContainer>
                 <ButtonContainer title={"관계"}>
-                    <Button text={"주인공"} title={"relationship"} onClickFunction={handleButtonClick}/>
-                    <Button text={"악역"} title={"relationship"} onClickFunction={handleButtonClick}/>
-                    <Button text={"주인공 가족"} title={"relationship"} onClickFunction={handleButtonClick}/>
-                    <Button text={"라이벌"} title={"relationship"} onClickFunction={handleButtonClick}/>
-                    <Button text={"스승"} title={"relationship"} onClickFunction={handleButtonClick}/>
+                    <Button text={"주인공"} title={"category"} onClickFunction={handleButtonClick}/>
+                    <Button text={"악역"} title={"category"} onClickFunction={handleButtonClick}/>
+                    <Button text={"주인공 가족"} title={"category"} onClickFunction={handleButtonClick}/>
+                    <Button text={"라이벌"} title={"category"} onClickFunction={handleButtonClick}/>
+                    <Button text={"스승"} title={"category"} onClickFunction={handleButtonClick}/>
                 </ButtonContainer>
                 <ButtonContainer title={"성격"}>
                     <Button text={"활발"} title={"personality"} onClickFunction={handleButtonClick}/>
@@ -137,8 +142,8 @@ const Keyword = () => {
                     <Button text={"싸움광"} title={"personality"} onClickFunction={handleButtonClick}/>
                 </ButtonContainer>
                 <ButtonContainer title={"성별"}>
-                    <Button text={"남"} title={"sex"} onClickFunction={handleButtonClick}/>
-                    <Button text={"여"} title={"sex"} onClickFunction={handleButtonClick}/>
+                    <Button text={"남"} title={"gender"} onClickFunction={handleButtonClick}/>
+                    <Button text={"여"} title={"gender"} onClickFunction={handleButtonClick}/>
                 </ButtonContainer>
                 <ButtonContainer title={"MBTI"}>
                     <Button text={"ISTJ"} title={"mbti"} onClickFunction={handleButtonClick}/>

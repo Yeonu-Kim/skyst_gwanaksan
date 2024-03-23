@@ -19,17 +19,6 @@ const Result = () => {
         const [images, setImages] = useState([]);
         const [names, setNames] = useState([]);
         const [descriptions, setDescriptions] = useState([]);
-        useEffect(() => {
-            fetch('http://127.0.0.1:8000/image/?prompt=(...)')
-            .then((res) => {
-                return res.json();
-            })
-            .then((data) => {
-                setImages(data.image_url);
-                setNames(data.scores.map(score => score.name));
-                setDescriptions(data.scores.map(score => score.description));
-            });
-        }, []);
         // Preparing candidates data dynamically based on fetched data
         const candidatesData = names.slice(1, 3).map((name, index) => ({
             imageUrl: images[index + 1], // Corrects the index to match the sliced names
