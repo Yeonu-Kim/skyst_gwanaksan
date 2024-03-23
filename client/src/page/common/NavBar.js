@@ -32,7 +32,7 @@ const Footer = () => {
           </a>
   
           {/* Link to share */}
-          <a href="/share" className={styles.socialIcon}>
+          <a href="" className={styles.socialIcon}>
             <FaShareSquare />
           </a>
         </div>
