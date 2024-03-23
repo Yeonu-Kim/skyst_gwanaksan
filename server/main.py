@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from openai import OpenAI
 import os
 import pandas as pd
@@ -13,6 +14,19 @@ app = FastAPI()
 
 app.include_router(image_router, prefix="/image")
 app.include_router(keywords_router, prefix="/keywords")
+
+origins = [
+    "http://localhost:3000",
+    "http://ec2-34-228-60-199.compute-1.amazonaws.com"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 client = OpenAI()
 
