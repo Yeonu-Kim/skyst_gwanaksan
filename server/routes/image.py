@@ -51,20 +51,20 @@ async def generate_image_from_prompt(prompt: str, keyword_list: List[dict]):
                 ],
             }
         ],
-        max_tokens=300,
-    ).choices[0]
+        max_tokens=1000,
+    ).choices[0].message.content
 
     image_features = get_image_embedding(description)
 
     df = pd.read_pickle("server/assets/characters.pkl")
     df["score"] = df["embedding"].apply(lambda x: calculate_similarity(x, image_features))
-    df = df[["id", "name", "anime_name", "score"]]
+    df = df[["id", "name", "anime_name", "mbti", "genre", "job", "category", "personality", "gender", "description", "score"]]
 
     keyword_df = pd.DataFrame(keyword_list)
     final_df = pd.merge(df, keyword_df, on=["name", "anime_name"], how="inner")
-    final_df["score"] = final_df["score_x"] * 6 + final_df["score_y"]
+    final_df["score"] = final_df["score_x"] * 3 + final_df["score_y"]
     final_df.sort_values("score", ascending=False, inplace=True)
-    final_df = final_df[["id_x", "name", "anime_name", "score"]]
+    final_df = final_df[["id_x", "name", "anime_name", "mbti", "genre", "job", "category", "personality", "gender", "description", "score"]]
 
     return {
         "image_url": image_url,

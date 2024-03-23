@@ -32,5 +32,5 @@ def generate_pickle():
     df["id"] = range(len(df))
     df.index = df["id"]
 
-    df["embedding"] = df["description"].apply(get_image_embedding)
+    df["embedding"] = df["imageDescription"].apply(get_image_embedding)
     df.to_pickle("server/assets/characters.pkl")
