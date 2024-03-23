@@ -53,7 +53,7 @@ const SendButton = ({text, originalColor='var(--secondary-color)', onClickFuncti
     );
 }
 
-const RadioButton = ({text1, text2}) => {
+const RadioButton = ({text1, text2, upperHandle}) => {
   const [isClicked, setIsClicked] = useState(true)
   const firstButtonClasses = `${styles.button} ${isClicked ? styles.clicked : ''}`;
   const secondButtonClasses = `${styles.button} ${!isClicked ? styles.clicked : ''}`;
@@ -74,6 +74,7 @@ const RadioButton = ({text1, text2}) => {
       return; 
     }
     setIsClicked((current) => !current);
+    upperHandle((current) => !current);
   }
 
   return (

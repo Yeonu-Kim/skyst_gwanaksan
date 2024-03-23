@@ -1,5 +1,7 @@
 /* Global.css */
 @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+
 :root {
     --primary-color: #FA95EB;
     --secondary-color: #3DBCF1;
