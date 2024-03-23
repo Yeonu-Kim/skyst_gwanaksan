@@ -1,40 +1,56 @@
 import React from 'react';
-import './page/common/Global.css'; // Import the CSS file
-import {NavBar,Footer} from './page/common/NavBar';
-import Button from './page/common/Button';
-import {Title, SubTitle, Paragraph} from './page/common/Title';
 import {
   createBrowserRouter,
   RouterProvider
 } from "react-router-dom";
+import { NavBar, Footer } from './page/common/NavBar';
+import { Keyword } from './page/keyword/Keyword';
+import './page/common/Global.css'; // Import the CSS file
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <div>Main Page</div>
+    element: (
+    <>
+      <NavBar />
+      <div>Main Page</div>
+    </>
+    )
   },
   {
     path: '/face',
-    element: <div>face</div>,
+    element: (
+      <>
+        <NavBar />
+        <div>Face</div>
+      </>
+      )
   },
   {
     path: '/keyword',
-    element: <div>keyword</div>
+    element: (
+      <>
+        <NavBar />
+        <Keyword />
+      </>
+      )
   },
   {
     path: '/result',
-    element: <div>result</div>,
+    element: (
+      <>
+        <NavBar />
+        <div>Result</div>
+        <Footer />
+      </>
+      )
   }
 ]);
-
-
 
 function App() {
   return (
     <div>
       <RouterProvider router={router} />
-      <Button/>
-      <Footer/>
     </div>
   );
 }
