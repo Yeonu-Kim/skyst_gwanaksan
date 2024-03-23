@@ -3,7 +3,7 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    padding: 1rem;
+    padding-bottom: 0.8rem;
 }
 
 .subtitle{
@@ -11,7 +11,7 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    padding: 1rem;
+    padding-bottom: 1rem;
 
 }
 
@@ -20,5 +20,5 @@
     font-style: normal;
     font-weight: 300;
     line-height: normal;
-    padding: 1rem;
+    padding-bottom: 1.8rem;
 }
