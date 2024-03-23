@@ -1,7 +1,7 @@
 import base64
 from dotenv import load_dotenv
-from fastapi import APIRouter, UploadFile
-from typing import List
+from fastapi import APIRouter, UploadFile, Body
+from typing import List, Annotated
 from openai import OpenAI
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
@@ -43,7 +43,7 @@ def return_result(image_features: List[float], image_url: str, keyword_list: Lis
 
 
 @router.post("/prompt/")
-async def generate_image_from_prompt(prompt: str, keyword_list: List[dict]):
+async def generate_image_from_prompt(prompt: Annotated[str, Body()], keyword_list: List[dict]):
     response = client.images.generate(
         model="dall-e-3",
         prompt="다음 설명에 맞는 애니메이션 캐릭터를 그려주세요: " + prompt,
