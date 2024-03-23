@@ -1,14 +1,24 @@
 .button {
     border: 0.2rem solid #000;
-    background: var(--white-color);
     box-shadow: -0.6rem 0.6rem 0rem 0rem var(--gray-color);
     font-size: 1.8rem; 
     color: #000; 
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s; 
+    margin: 1rem;
   }
-  
-  .button:hover {
-    background-color: #000; 
+
+  .button.clicked {
+    box-shadow: -0.2rem 0.2rem 0rem 0rem var(--gray-color);
+    transform: translateY(0.4rem) translateX(-0.4rem); 
   }
-  
+  .btnText{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.6rem;
+    gap: 1rem;
+    color: var(--black-color);
+    font-size: 1.2rem;
+    font-weight: 800;
+  }
