@@ -3,12 +3,18 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styles from './Button.module.css'; 
   
-const Button = ({text, onClickColor='var(--highlight-pink)', originalColor='var(--primary-color)', onClickTextColor='var(--white-color)', onClickFunction, title=""}) => {
-    const [isClicked, setIsClicked] = useState(false);
+const Button = ({text,
+                onClickColor='var(--highlight-pink)',
+                originalColor='var(--primary-color)',
+                onClickTextColor='var(--white-color)',
+                onClickFunction,
+                title="",
+                defaultClick=false
+              }) => {
+    const [isClicked, setIsClicked] = useState(defaultClick);
     
     const handleClick = () => {
       setIsClicked((current) => !current);
-      console.log(!isClicked);
       if (onClickFunction) {
           onClickFunction(title, text);
       }
@@ -47,10 +53,43 @@ const SendButton = ({text, originalColor='var(--secondary-color)', onClickFuncti
     );
 }
 
+const RadioButton = ({text1, text2, isClicked, handleClick}) => {
+
+  const firstButtonClasses = `${styles.button} ${isClicked ? styles.clicked : ''}`;
+  const secondButtonClasses = `${styles.button} ${!isClicked ? styles.clicked : ''}`;
+  const firstButtonStyle = {
+    backgroundColor: isClicked ? 'var(--highlight-pink)' : 'var(--primary-color)',
+    color: isClicked ? 'var(--white-color)' : 'black',
+  };
+  const secondButtonStyle = {
+    backgroundColor: !isClicked ? 'var(--highlight-pink)' : 'var(--primary-color)',
+    color: !isClicked ? 'var(--white-color)' : 'black',
+  };
+
+  return (
+    <div>
+      <button 
+        className={firstButtonClasses} 
+        onClick={handleClick} 
+        style={firstButtonStyle}
+      >  
+          <span className={styles.btnText}>{text1}</span>
+      </button>
+      <button 
+        className={secondButtonClasses} 
+        onClick={handleClick} 
+        style={secondButtonStyle}
+      >  
+          <span className={styles.btnText}>{text2}</span>
+      </button>
+    </div>
+  );
+}
+
 Button.propTypes = {
     text: PropTypes.string.isRequired,
     onClickColor: PropTypes.string,
     backgroundColor: PropTypes.string,
 };
 
-export { Button, SendButton };
+export { Button, SendButton, RadioButton };

@@ -4,6 +4,7 @@ import {
   RouterProvider
 } from "react-router-dom";
 import { NavBar, Footer } from './page/common/NavBar';
+import { Face } from './page/face/Face';
 import { Keyword } from './page/keyword/Keyword';
 import { Main } from './page/main/Main';
 import './page/common/Global.css'; 
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
     element: (
       <>
         <NavBar />
-        <div>Face</div>
+        <Face/>
       </>
       )
   },
