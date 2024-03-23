@@ -4,21 +4,22 @@ import styles from './Result.module.css';
 import { Title,SubTitle,Paragraph } from '../common/Title';
 import { Button }  from '../common/Button';
 
-const candidatesData = [
-    {
-      imageUrl: 'https://i.namu.wiki/i/xe_mTv5uhI2Wen7WEBDWRMuYYpbb7avQxQvjLQBZC2S7PYUSVQckDtGhEh9KqnnzHHKob3y7ID28Ni-nikbSlrkAai6AFDRDidLuXB1mhc28FwG2p_sNgg8Clfnar3MvdgeM4SPt9ppntWKacrCW4Q.webp',
-      name: '램'
-    },
-    {
-      imageUrl: 'https://i.namu.wiki/i/xe_mTv5uhI2Wen7WEBDWRMuYYpbb7avQxQvjLQBZC2S7PYUSVQckDtGhEh9KqnnzHHKob3y7ID28Ni-nikbSlrkAai6AFDRDidLuXB1mhc28FwG2p_sNgg8Clfnar3MvdgeM4SPt9ppntWKacrCW4Q.webp',
-      name: '미사카 미코토'
-    }
-  ];
+// const candidatesData = [
+//     {
+//       imageUrl: 'https://i.namu.wiki/i/xe_mTv5uhI2Wen7WEBDWRMuYYpbb7avQxQvjLQBZC2S7PYUSVQckDtGhEh9KqnnzHHKob3y7ID28Ni-nikbSlrkAai6AFDRDidLuXB1mhc28FwG2p_sNgg8Clfnar3MvdgeM4SPt9ppntWKacrCW4Q.webp',
+//       name: '램'
+//     },
+//     {
+//       imageUrl: 'https://i.namu.wiki/i/xe_mTv5uhI2Wen7WEBDWRMuYYpbb7avQxQvjLQBZC2S7PYUSVQckDtGhEh9KqnnzHHKob3y7ID28Ni-nikbSlrkAai6AFDRDidLuXB1mhc28FwG2p_sNgg8Clfnar3MvdgeM4SPt9ppntWKacrCW4Q.webp',
+//       name: '미사카 미코토'
+//     }
+//   ];
 
 const Result = () => {
         const [images, setImages] = useState([]);
         const [names, setNames] = useState([]);
         const [descriptions, setDescriptions] = useState([]);
+        const [keywords, setKeywords] = useState([]);
         useEffect(() => {
             fetch('http://127.0.0.1:8000/image/?prompt=(...)')
             .then((res) => {
@@ -28,6 +29,15 @@ const Result = () => {
                 setImages(data.image_url);
                 setNames(data.scores.map(score => score.name));
                 setDescriptions(data.scores.map(score => score.description));
+                const firstItem = data.scores[0];
+                setKeywords([
+                    firstItem.genre,
+                    firstItem.job,
+                    firstItem.category,
+                    firstItem.personality,
+                    firstItem.gender,
+                    firstItem.mbti,
+                ]);
             });
         }, []);
         // Preparing candidates data dynamically based on fetched data
@@ -47,7 +57,7 @@ const Result = () => {
                 />
             )}
         <ResultLink text="결과 공유 링크 복사하기" href="" />
-        <Keywords keywords={["키즈나 아이", "일본", "버츄얼 유튜버", "ENFP", "활발"]} />
+        <Keywords keywords={keywords} /> 
         <ResultCandidate candidates={candidatesData} />
         </div>
     )
