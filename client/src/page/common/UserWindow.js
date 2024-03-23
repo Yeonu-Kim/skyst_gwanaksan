@@ -1,5 +1,7 @@
 import React, { useState, useEffect} from "react"
 
+import styles from "./Button.module.css"
+
 function WindowHeader() {
     console.log("rendered!")
     return (
@@ -86,7 +88,8 @@ function UploadWindow ({ imageUrl, setImageUrl }) {
         return (
             <div>
                 <form onSubmit={handleClick}>
-                    <input type="file" onChange={handleFileChange} accept=".jpg, .jpeg, .png"/>
+                    <label className={styles["button"]} htmlFor="file">이미지 파일 선택</label>
+                    <input type="file" id="file" onChange={handleFileChange} accept=".jpg, .jpeg, .png" style={{opacity: 0}}/>
                     <button>Submit</button>
                 </form>
             </div>

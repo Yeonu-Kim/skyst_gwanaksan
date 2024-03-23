@@ -16,7 +16,7 @@ const Face = () => {
     return (
         <section>
             <div>
-                <SubTitle content={"STEP 1."}/>
+                <SubTitle content={"STEP 2."}/>
                 <Title content={"이상형의 얼굴은?"}/>
                 <Paragraph content={"결과물이 이상형의 얼굴과 비슷해졌다면 '완전 좋아❤️' 버튼을 눌러주세요."}/>
             </div>
