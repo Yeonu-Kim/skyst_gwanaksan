@@ -1,6 +1,6 @@
 
 .resultContainer {
-    margin: 2rem;
+    margin: 0 4rem;
 }
 .resultCard {
     background-color: var(--primary-color);
@@ -25,7 +25,6 @@
     
 }
   
-
 
   
   .keywords {
@@ -54,9 +53,18 @@
   .imageComponent{
     text-align: center;
     width: 40%;
+    max-width: 30rem; 
 }
 .imageComponent img {
     width: 100%; 
     height: auto; 
     border-radius: 1rem; 
+}
+@media (min-width: 1024px) {
+  .resultContainer {
+    margin: 0 8rem;
+  }
+  .resultCard {
+    max-width: 60rem;
+  }
 }
