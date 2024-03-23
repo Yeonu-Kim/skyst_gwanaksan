@@ -42,7 +42,7 @@ function WindowResult ({ imageUrl }) {
 }
 
 function UploadWindow ({ imageUrl, setImageUrl }) {
-    const keywordList = JSON.parse(window.sessionStorage.getItem("keyword_list"));
+    const keywordList = window.sessionStorage.getItem("keyword_list");
     const [file, setFile] = useState(null);
 
     const handleFileChange = (event) => {
@@ -59,7 +59,7 @@ function UploadWindow ({ imageUrl, setImageUrl }) {
     const sendData = () => {
         const data = new FormData();
         data.append('image', file);
-        data.append('keyword_list', JSON.stringify(keywordList));
+        data.append('keyword_list', keywordList);
         fetch('http://ec2-34-228-60-199.compute-1.amazonaws.com/api/image/image', {
             method: 'POST',
             headers: {

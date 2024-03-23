@@ -91,7 +91,7 @@ async def generate_image_from_prompt(prompt: Annotated[str, Body()], keyword_lis
 
 
 @router.post("/image/")
-async def generate_image_from_image(image: UploadFile, keyword_list: str):
+async def generate_image_from_image(image: UploadFile, keyword_list: Annotated[str, Body()]):
     image_contents = await image.read()
     base64_image = base64.b64encode(image_contents).decode("utf-8")
 
