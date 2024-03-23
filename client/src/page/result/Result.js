@@ -53,7 +53,7 @@ const Result = () => {
                     description={descriptions[0]} 
                 />
             )}
-        <ResultLink text="결과 공유 링크 복사하기" onClick={() => exportPNG('resultContainer')} />
+        <ResultLink text="결과 캡쳐하기" onClick={() => exportPNG('resultContainer')} />
         <div className={styles.resultFooter}>
         <Keywords keywords={keywords} /> 
         <ResultCandidate candidates={candidatesData} />
