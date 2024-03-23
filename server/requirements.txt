@@ -2,11 +2,9 @@ uvicorn
 fastapi
 python-dotenv
 pandas
+openpyxl
 pillow
-torch
-torchvision
 openai
 requests
 scikit-learn
 setuptools
-git+https://github.com/openai/CLIP.git
