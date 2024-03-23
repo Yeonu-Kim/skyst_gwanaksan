@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react"
+import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { SendButton } from './Button';
 import styles from "./UserWindow.module.css"
@@ -6,8 +6,17 @@ import button from './Button.module.css'
 
 function WindowHeader() {
     console.log("rendered!")
+    const Circle = ({ color }) => {
+        return (
+            <div className={styles.circle} style={{ backgroundColor: color }}></div>
+        );
+    }
     return (
         <div className={styles.window_header}>
+            <Circle color={"var(--primary-color)"} />
+            <Circle color={"var(--highlight-yellow)"} />
+            <Circle color={"var(--secondary-color)"} />
+            <div className={styles.window_title}>My Ideal 💭💭💭</div>
         </div>
     );
 }
@@ -27,7 +36,7 @@ function WindowResult ({ imageUrl }) {
 
     const redirectResult = () => {
         navigation('/result');
-    } 
+    }
 
     const data = {
         "image": imageUrl,
@@ -68,30 +77,30 @@ function UploadWindow ({ imageUrl, setImageUrl }) {
             },
             body: data
         })
-          .then(response => {
-              if (!response.ok) {
-                  throw new Error('Network error');
-              }
-              return response.json();
-          })
-          .then(data => {
-              setImageUrl(data.image_url);
-              window.sessionStorage.setItem(imageUrl);
-              window.sessionStorage.setItem(data.scores);
-              console.log(imageUrl);
-              console.log(data.scores);
-          })
-          .catch(error => {
-              console.log(error);
-          })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network error');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setImageUrl(data.image_url);
+                window.sessionStorage.setItem(imageUrl);
+                window.sessionStorage.setItem(data.scores);
+                console.log(imageUrl);
+                console.log(data.scores);
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
 
     function UploadInput () {
         return (
             <div>
                 <form className={styles.file_upload_wrap} onSubmit={handleClick}>
-                    <label className={styles.filename} htmlFor="file">이미지 파일 선택</label>
                     <input className={styles.upload_btn} type="file" id="file" onChange={handleFileChange} accept=".jpg, .jpeg, .png" style={{opacity: 0}}/>
+                    <label className={styles.filename} htmlFor="file">이미지 업로드</label>
                     <button className={styles.send_btn}>Submit</button>
                 </form>
             </div>
