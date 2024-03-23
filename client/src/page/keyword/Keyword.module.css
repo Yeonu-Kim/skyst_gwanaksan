@@ -1,0 +1,28 @@
+.button_wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+}
+
+.button_container {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+}
+  
+  /* 스크롤바의 폭 너비 */
+  .button_container::-webkit-scrollbar {
+      width: 5px;
+      height: 20px;
+  }
+  
+  .button_container::-webkit-scrollbar-thumb {
+      background: var(--primary-color); /* 스크롤바 색상 */
+      border-radius: 10px; /* 스크롤바 둥근 테두리 */
+      background-clip: padding-box;
+      border: 5px solid transparent;
+  }
+  
+  .button_container::-webkit-scrollbar-track {
+      background: rgba(220, 20, 60, .1);  /*스크롤바 뒷 배경 색상*/
+  }
