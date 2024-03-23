@@ -1,0 +1,22 @@
+/* Global.css */
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+:root {
+    --primary-color: #FA95EB;
+    --secondary-color: #3DBCF1;
+    --highlight-pink: #D411ED;
+    --highlight-yellow: #FDFB38;
+    --black-color: #10162E;
+    --white-color: #FEFEFE;
+    --gray-color: #636363;
+}
+  
+body {
+    margin: 0;
+    font-family: 'NanumSquare', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+html{
+    font-size: 62.5%;
+}
