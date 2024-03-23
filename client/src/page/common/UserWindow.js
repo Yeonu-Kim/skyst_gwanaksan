@@ -36,7 +36,7 @@ function WindowResult ({ imageUrl }) {
     return (
         <div>
             <img src={imageUrl} />
-            <SendButton text={"완전 좋아!❤️"}/>
+            {/* <SendButton text={"완전 좋아!❤️"}/> */}
         </div>
     )
 }

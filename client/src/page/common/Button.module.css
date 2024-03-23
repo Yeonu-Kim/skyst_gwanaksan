@@ -1,7 +1,6 @@
 .button {
     border: 0.2rem solid #000;
     box-shadow: -0.6rem 0.6rem 0rem 0rem var(--gray-color);
-    font-size: 1.8rem; 
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s; 
     margin: 1rem;
@@ -23,3 +22,21 @@
     font-size: 1.2rem;
     font-weight: 800;
   }
+
+@media (min-width: 1024px) {
+    .button{
+        font-size: 3.2rem;
+        border: 0.4rem solid #000;
+        box-shadow: -1.2rem 1.2rem 0rem 0rem var(--gray-color);
+    }
+    .button.clicked {
+      box-shadow: -0.4rem 0.4rem 0rem 0rem var(--gray-color);
+      transform: translateY(0.8rem) translateX(-0.8rem); 
+    }
+    .btnText{
+      padding: 2rem;
+      gap: 2rem;
+      font-size: 2rem;
+      font-weight: 900;
+    }
+}

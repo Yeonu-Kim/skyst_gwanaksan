@@ -34,3 +34,32 @@
     width: 300px;
     margin: 5rem auto;
   }
+
+@media (min-width: 1024px) {
+    .button_wrap {
+        gap: 4.8rem;
+    }
+    
+    .button_container {
+        gap: 1.5rem;
+    }
+      
+      /* 스크롤바의 폭 너비 */
+      .button_container::-webkit-scrollbar {
+          width: 1rem;
+          height: 4rem;
+      }
+      
+      .button_container::-webkit-scrollbar-thumb {
+          border-radius: 2rem; /* 스크롤바 둥근 테두리 */
+          border: 1rem solid transparent;
+      }
+      
+
+    
+      .main_body {
+        gap: 6rem;
+        width: 70%;
+        margin: 10rem auto;
+      }
+}
