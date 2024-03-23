@@ -1,0 +1,42 @@
+/* NavBar.module.css */
+.header{
+    background-color: var(--black-color); 
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.logo {
+    font-weight: bold;
+    color: var(--primary-color);
+    font-size: 1.5em;
+}
+  
+  
+.footer {
+    background-color: var(--black-color); 
+    color: var(--primary-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    line-height: 1.5;
+}
+
+.socialIcon {
+    margin: 0 0.5rem; 
+    font-size: 2.4rem; 
+    color: var(--primary-color);
+}
+.socialLinks{
+    padding: 1rem;
+}
+.label {
+    margin-right: 10px; 
+    color: var(--primary-color); 
+}
+.team{
+    justify-content: flex-end;
+    padding-right: 1rem;
+}
