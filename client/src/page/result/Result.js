@@ -20,6 +20,7 @@ const Result = () => {
     useEffect(() => {
 
     const storedScores = window.sessionStorage.getItem('scores');
+        console.log(storedScores)
         const scoresData = JSON.parse(storedScores);
         setData(scoresData);
         setImages(scoresData.map(score => `/images/${score.id_x}.png`)); 
