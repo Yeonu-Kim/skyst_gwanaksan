@@ -32,6 +32,7 @@ function App() {
     <div>
       <RouterProvider router={router} />
       <Button/>
+      <Footer/>
     </div>
   );
 }
