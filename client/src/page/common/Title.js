@@ -13,7 +13,7 @@ const Title = ({content}) => {
 const SubTitle = ({content}) => {
     return (
       <div className={styles.subtitle}>
-        {content}
+        <span className={styles.english}>{content}</span>
       </div>
     );
   }
@@ -29,15 +29,23 @@ const Paragraph = ({content}) => {
 const MainTitle = ({content}) => {
   return (
     <div className={styles.maintitle}>
-      {content}
+      <span className={styles.english}>{content}</span>
     </div>
   )
+}
+
+const MainSubTitle = ({content}) => {
+  return (
+    <div className={styles.title}>
+      <span className={styles.english}>{content}</span>
+    </div>
+  );
 }
 
 const MainParagraph = ({content}) => {
   return (
     <div className={styles.mainparagraph}>
-      {content}
+      <span>{content}</span>
     </div>
   )
 }
@@ -57,4 +65,4 @@ MainTitle.propTypes = {
 MainParagraph.propTypes = {
   content: PropTypes.string.isRequired
 };
-export { Title, SubTitle, Paragraph, MainTitle, MainParagraph };
+export { Title, SubTitle, Paragraph, MainTitle, MainParagraph, MainSubTitle };

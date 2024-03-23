@@ -77,7 +77,7 @@ const Keyword = () => {
     return (
         <section className={styles.main_body}>
             <div>
-                <SubTitle content={"STEP 2."} />
+                <SubTitle content={"STEP 1."} />
                 <Title content={"이상형의 성격은? "} />
                 <Paragraph content={"이상형의 성격을 나타내는 키워드를 모두 선택해주세요."} />
             </div>
