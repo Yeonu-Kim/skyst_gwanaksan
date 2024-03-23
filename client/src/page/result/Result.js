@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Result.module.css'; 
 import { Title,SubTitle,Paragraph } from '../common/Title';
@@ -16,11 +16,36 @@ const candidatesData = [
   ];
 
 const Result = () => {
+        const [images, setImages] = useState([]);
+        const [names, setNames] = useState([]);
+        const [descriptions, setDescriptions] = useState([]);
+        useEffect(() => {
+            fetch('http://127.0.0.1:8000/image/?prompt=(...)')
+            .then((res) => {
+                return res.json();
+            })
+            .then((data) => {
+                setImages(data.image_url);
+                setNames(data.scores.map(score => score.name));
+                setDescriptions(data.scores.map(score => score.description));
+            });
+        }, []);
+        // Preparing candidates data dynamically based on fetched data
+        const candidatesData = names.slice(1, 3).map((name, index) => ({
+            imageUrl: images[index + 1], // Corrects the index to match the sliced names
+            name,
+        }));
     return (
         <div className={styles.resultContainer}>
-            <Title content="이상형 매칭 완료 🎁" />
+        <Title content="이상형 매칭 완료 🎁" />
         <Paragraph content="당신의 이상형은 바로..." />
-        <ResultCard imageUrl="https://i.namu.wiki/i/xe_mTv5uhI2Wen7WEBDWRMuYYpbb7avQxQvjLQBZC2S7PYUSVQckDtGhEh9KqnnzHHKob3y7ID28Ni-nikbSlrkAai6AFDRDidLuXB1mhc28FwG2p_sNgg8Clfnar3MvdgeM4SPt9ppntWKacrCW4Q.webp" name="키즈나 아이" description="키즈나 아이는 2016년 12월부터 활동한 일본의 버츄얼 유튜버이다"/>
+        {images.length > 0 && descriptions.length > 0 && (
+                <ResultCard 
+                    imageUrl={images[0]} 
+                    name={names[0]} 
+                    description={descriptions[0]} 
+                />
+            )}
         <ResultLink text="결과 공유 링크 복사하기" href="" />
         <Keywords keywords={["키즈나 아이", "일본", "버츄얼 유튜버", "ENFP", "활발"]} />
         <ResultCandidate candidates={candidatesData} />
