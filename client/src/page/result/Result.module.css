@@ -1,5 +1,7 @@
 
-  
+.resultContainer {
+    margin: 2rem;
+}
 .resultCard {
     background-color: var(--primary-color);
     border-radius: 2rem; 
