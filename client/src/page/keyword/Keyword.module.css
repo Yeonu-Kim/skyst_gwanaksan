@@ -26,3 +26,11 @@
   .button_container::-webkit-scrollbar-track {
       background: rgba(220, 20, 60, .1);  /*스크롤바 뒷 배경 색상*/
   }
+
+  .main_body {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    width: 300px;
+    margin: 5rem auto;
+  }
