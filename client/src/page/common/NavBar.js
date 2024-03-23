@@ -32,8 +32,8 @@ const Footer = () => {
               <FaFacebookF />
             </a>
     
-            {/* Link to share */}
-            <a href="" className={styles.socialIcon}>
+            {/* Link to our website */}
+            <a href="http://ec2-34-228-60-199.compute-1.amazonaws.com/" className={styles.socialIcon}>
               <FaShareSquare />
             </a>
           </div>

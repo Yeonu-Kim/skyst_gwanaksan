@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import styles from './Result.module.css'; 
 import { Title,SubTitle,Paragraph } from '../common/Title';
 import { Button }  from '../common/Button';
+import exportPNG from './Exportpng.tsx';
 import { useNavigate } from 'react-router-dom';
-
 const Result = () => {
+    const [currentUrl, setCurrentUrl] = useState(''); 
     const [data, setData] = useState([]);
     const [images, setImages] = useState([]);
     const [names, setNames] = useState([]);
@@ -39,9 +40,10 @@ const Result = () => {
             imageUrl: `/images/${score.id_x}.png`,
             name: score.name,
         })));
+        setCurrentUrl(window.location.href);
     }, []);
     return (
-        <div className={styles.resultContainer}>
+        <div className={styles.resultContainer} id="resultContainer">
         <Title content="이상형 매칭 완료 🎁" />
         <Paragraph content="당신의 이상형은 바로..." />
         {images.length > 0 && descriptions.length > 0 && (
@@ -51,7 +53,7 @@ const Result = () => {
                     description={descriptions[0]} 
                 />
             )}
-        <ResultLink text="결과 공유 링크 복사하기" href="" />
+        <ResultLink text="결과 공유 링크 복사하기" onClick={() => exportPNG('resultContainer')} />
         <div className={styles.resultFooter}>
         <Keywords keywords={keywords} /> 
         <ResultCandidate candidates={candidatesData} />
@@ -74,9 +76,9 @@ const ResultCard = ({ imageUrl,name, description }) => {
     );
 }
 
-const ResultLink = ({ text, href }) => {
+const ResultLink = ({ text, onClick }) => {
     return (
-        <a href={href} className={styles.resultBtn}>
+        <a onClick={onClick} className={styles.resultBtn}>
           <Button text={text} originalColor='var(--secondary-color)'/>
         </a>
     );
