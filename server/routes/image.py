@@ -1,10 +1,11 @@
 import base64
 from dotenv import load_dotenv
 from fastapi import APIRouter, UploadFile, Body
-from typing import List, Annotated
+import json
 from openai import OpenAI, BadRequestError
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
+from typing import List, Annotated
 
 load_dotenv()
 
@@ -90,7 +91,7 @@ async def generate_image_from_prompt(prompt: Annotated[str, Body()], keyword_lis
 
 
 @router.post("/image/")
-async def generate_image_from_image(image: UploadFile, keyword_list: List[dict]):
+async def generate_image_from_image(image: UploadFile, keyword_list: str):
     image_contents = await image.read()
     base64_image = base64.b64encode(image_contents).decode("utf-8")
 
@@ -136,4 +137,5 @@ async def generate_image_from_image(image: UploadFile, keyword_list: List[dict])
         }
     image_url = response.data[0].url
 
+    keyword_list = json.loads(keyword_list)
     return return_result(image_features, image_url, keyword_list)

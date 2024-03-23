@@ -41,38 +41,74 @@ function WindowResult ({ imageUrl }) {
     )
 }
 
-function UploadInput({}) {
+function UploadWindow ({ imageUrl, setImageUrl }) {
+    const keywordList = JSON.parse(window.sessionStorage.getItem("keyword_list"));
+    const [file, setFile] = useState(null);
 
-    return (
-        <div>
-            <form>
-                <input type="file"  />
-            </form>
-        </div>
-    );
-}
+    const handleFileChange = (event) => {
+        if (event.target.files) {
+            setFile(event.target.files[0]);
+        }
+    }
 
-function UploadWindow({ imageUrl }) {
+    const handleClick = (event) => {
+        event.preventDefault();
+        sendData();
+    }
+
+    const sendData = () => {
+        const data = new FormData();
+        data.append('image', file);
+        data.append('keyword_list', JSON.stringify(keywordList));
+        fetch('http://ec2-34-228-60-199.compute-1.amazonaws.com/api/image/image', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json'
+            },
+            body: data
+        })
+          .then(response => {
+              if (!response.ok) {
+                  throw new Error('Network error');
+              }
+              return response.json();
+          })
+          .then(data => {
+              setImageUrl(data.image_url);
+              console.log(imageUrl);
+          })
+          .catch(error => {
+              console.log(error);
+          })
+    }
+
+    function UploadInput () {
+        return (
+            <div>
+                <form onSubmit={handleClick}>
+                    <input type="file" onChange={handleFileChange} accept=".jpg, .jpeg, .png"/>
+                    <button>Submit</button>
+                </form>
+            </div>
+        );
+    }
 
     return (
         <section>
             <WindowHeader />
             <UploadInput />
-            {imageUrl === '' ? <WindowLoading /> : <WindowResult imageUrl={imageUrl} />}
-            <button>Upload</button>
+            { imageUrl === "" ? <WindowLoading /> : <WindowResult imageUrl={imageUrl} /> }
         </section>
-    );
+    )
 }
-
 
 function DiffusionWindow ({ imageUrl, setImageUrl }) {
     const keywordList = JSON.parse(window.sessionStorage.getItem("keyword_list"));
-    const [isSubmit, setIsSubmit] = useState(false);
     const [command, setCommand] = useState("");
 
     const handleClick = (event) => {
         event.preventDefault();
-        setIsSubmit(true);
+        sendData();
     }
 
     const handleChange = (event) => {
@@ -103,19 +139,12 @@ function DiffusionWindow ({ imageUrl, setImageUrl }) {
         })
         .then(data => {
             setImageUrl(data.image_url);
-            setIsSubmit(false);
             console.log(imageUrl);
         })
         .catch(error => {
             console.log(error);
         })
     }
-
-    useEffect(() => {
-        if(isSubmit) {
-            sendData();
-        }
-    }, [isSubmit])
 
     return (
         <section>
@@ -132,14 +161,14 @@ function DiffusionWindow ({ imageUrl, setImageUrl }) {
 
 function UserWindow({isClicked}) {
     const [imageUrl, setImageUrl] = useState("");
-    
+
     if (isClicked) {
         return (
             <DiffusionWindow imageUrl={imageUrl} setImageUrl={setImageUrl}/>
         );
     }
     return (
-        <UploadWindow imageUrl={imageUrl} />
+        <UploadWindow imageUrl={imageUrl} setImageUrl={setImageUrl} />
     );
 }
 
