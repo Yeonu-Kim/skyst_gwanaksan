@@ -1,0 +1,60 @@
+
+  
+.resultCard {
+    background-color: var(--primary-color);
+    border-radius: 2rem; 
+    text-align: center;
+    margin: 2rem auto;
+    max-width: 30rem; 
+}
+
+.resultContent{
+    background-color: var(--highlight-pink);
+}
+.resultCard img {
+    width: 100%; 
+    height: auto;
+    border-radius: 2rem 2rem 0 0;
+}
+
+.resultBtn{
+    display: flex;
+    justify-content: center;
+    
+}
+  
+
+
+  
+  .keywords {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .keyword {
+    background-color: var(--highlight-yellow);
+    color: var(--black-color);
+    font-weight: 800;
+    padding: 5px 10px;
+    border-radius: 15px;
+  }
+
+
+  .candidatesContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    gap: 2rem;
+  }
+
+  .imageComponent{
+    text-align: center;
+    width: 40%;
+}
+.imageComponent img {
+    width: 100%; 
+    height: auto; 
+    border-radius: 1rem; 
+}

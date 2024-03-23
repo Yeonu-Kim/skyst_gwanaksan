@@ -1,28 +1,38 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './Title.module.css'; 
 
-const Title = () => {
+const Title = ({content}) => {
   return (
     <div className={styles.title}>
-      LOVE
+      {content}
     </div>
   );
 }
 
-const SubTitle = () => {
+const SubTitle = ({content}) => {
     return (
       <div className={styles.subtitle}>
-        Lookalike Optimal with Valued Enchantment
+        {content}
       </div>
     );
   }
 
-const Paragraph = () => {
+const Paragraph = ({content}) => {
     return (
       <div className={styles.paragraph}>
-        이상형에 가까운 애니 캐릭터 & 버튜버 매칭 서비스
+        {content}
       </div>
     );
   }
 
+Title.propTypes = {
+  content: PropTypes.string.isRequired
+};
+SubTitle.propTypes = {
+    content: PropTypes.string.isRequired
+};
+Paragraph.propTypes = {
+    content: PropTypes.string.isRequired
+};
 export { Title, SubTitle, Paragraph };
