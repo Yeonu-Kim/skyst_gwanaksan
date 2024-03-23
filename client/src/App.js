@@ -41,6 +41,7 @@ const router = createBrowserRouter([
       <>
         <NavBar />
         <div>Result</div>
+        <Footer />
       </>
       )
   }
