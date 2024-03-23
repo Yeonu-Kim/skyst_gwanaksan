@@ -143,8 +143,8 @@ function DiffusionWindow ({ imageUrl, setImageUrl }) {
         .then(data => {
             setImageUrl(data.image_url);
             window.sessionStorage.setItem("image_url", imageUrl);
-            window.sessionStorage.setItem("scores", data.scores);
-            console.log(imageUrl);
+            window.sessionStorage.setItem("scores", JSON.stringify(data.scores));
+            console.log("scores is", data.scores);
         })
         .catch(error => {
             console.log(error);
