@@ -31,7 +31,7 @@ const Button = ({text, onClickColor='var(--highlight-pink)', originalColor='var(
     );
 };
 
-const SendButton = ({text, originalColor='var(--secondary-color)', onClick}) => {
+const SendButton = ({text, originalColor='var(--secondary-color)', onClickFunction}) => {
     const buttonStyle = {
       backgroundColor: originalColor,
     };
@@ -39,7 +39,7 @@ const SendButton = ({text, originalColor='var(--secondary-color)', onClick}) => 
     return (
       <button
       className={styles.button}
-      onClick={onClick}
+      onClick={onClickFunction}
       style={buttonStyle}
     > 
       <span className={styles.btnText}>{text}</span>

@@ -159,7 +159,7 @@ const Keyword = () => {
                     <Button text={"ENFP"} title={"mbti"} onClickFunction={handleButtonClick}/>
                 </ButtonContainer>
             </div>
-            <SendButton text={"선택 완료~ 🎵"} onClick={handleSendData}/>
+            <SendButton text={"선택 완료~ 🎵"} onClickFunction={handleSendData}/>
         </section>
     )
 }
