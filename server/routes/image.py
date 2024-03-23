@@ -2,7 +2,7 @@ import base64
 from dotenv import load_dotenv
 from fastapi import APIRouter, UploadFile, Body
 from typing import List, Annotated
-from openai import OpenAI
+from openai import OpenAI, BadRequestError
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -44,33 +44,45 @@ def return_result(image_features: List[float], image_url: str, keyword_list: Lis
 
 @router.post("/prompt/")
 async def generate_image_from_prompt(prompt: Annotated[str, Body()], keyword_list: List[dict]):
-    response = client.images.generate(
-        model="dall-e-3",
-        prompt="다음 설명에 맞는 애니메이션 캐릭터를 그려주세요: " + prompt,
-        size="1024x1024",
-        quality="standard",
-        n=1,
-    )
+    try:
+        response = client.images.generate(
+            model="dall-e-3",
+            prompt="다음 설명에 맞는 애니메이션 캐릭터를 그려주세요: " + prompt,
+            size="1024x1024",
+            quality="standard",
+            n=1,
+        )
+    except BadRequestError as e:
+        return {
+            "where": "dall-e-3",
+            "error": str(e)
+        }
     image_url = response.data[0].url
 
-    description = client.chat.completions.create(
-        model="gpt-4-vision-preview",
-        messages=[
-            {
-                "role": "user",
-                "content": [
-                    {"type": "text", "text": "Describe the character image in detail"},
-                    {
-                        "type": "image_url",
-                        "image_url": {
-                            "url": image_url,
+    try:
+        description = client.chat.completions.create(
+            model="gpt-4-vision-preview",
+            messages=[
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "text", "text": "Describe the character image in detail"},
+                        {
+                            "type": "image_url",
+                            "image_url": {
+                                "url": image_url,
+                            },
                         },
-                    },
-                ],
-            }
-        ],
-        max_tokens=1000,
-    ).choices[0].message.content
+                    ],
+                }
+            ],
+            max_tokens=1000,
+        ).choices[0].message.content
+    except BadRequestError as e:
+        return {
+            "where": "gpt-4-vision-preview",
+            "error": str(e)
+        }
 
     image_features = get_image_embedding(description)
 
@@ -82,34 +94,46 @@ async def generate_image_from_image(image: UploadFile, keyword_list: List[dict])
     image_contents = await image.read()
     base64_image = base64.b64encode(image_contents).decode("utf-8")
 
-    description = client.chat.completions.create(
-        model="gpt-4-vision-preview",
-        messages=[
-            {
-                "role": "user",
-                "content": [
-                    {"type": "text", "text": "Describe the character image in detail"},
-                    {
-                        "type": "image_url",
-                        "image_url": {
-                            "url": f"data:image/jpeg;base64,{base64_image}",
+    try:
+        description = client.chat.completions.create(
+            model="gpt-4-vision-preview",
+            messages=[
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "text", "text": "Describe the character image in detail"},
+                        {
+                            "type": "image_url",
+                            "image_url": {
+                                "url": f"data:image/jpeg;base64,{base64_image}",
+                            },
                         },
-                    },
-                ],
-            }
-        ],
-        max_tokens=1000,
-    ).choices[0].message.content
+                    ],
+                }
+            ],
+            max_tokens=1000,
+        ).choices[0].message.content
+    except BadRequestError as e:
+        return {
+            "where": "gpt-4-vision-preview",
+            "error": str(e)
+        }
 
     image_features = get_image_embedding(description)
 
-    response = client.images.generate(
-        model="dall-e-3",
-        prompt="Draw an anime character that fits the following description: " + description,
-        size="1024x1024",
-        quality="standard",
-        n=1,
-    )
+    try:
+        response = client.images.generate(
+            model="dall-e-3",
+            prompt="Draw an anime character that fits the following description: " + description,
+            size="1024x1024",
+            quality="standard",
+            n=1,
+        )
+    except BadRequestError as e:
+        return {
+            "where": "dall-e-3",
+            "error": str(e)
+        }
     image_url = response.data[0].url
 
     return return_result(image_features, image_url, keyword_list)
