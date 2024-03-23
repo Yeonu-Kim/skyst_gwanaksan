@@ -5,3 +5,9 @@
     width: 300px;
     margin: 5rem auto;
 }
+
+@media (min-width: 1024px) {
+    .face_body {
+        width: 800px;
+    }
+}

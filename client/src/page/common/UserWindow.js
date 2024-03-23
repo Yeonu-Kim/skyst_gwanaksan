@@ -90,8 +90,8 @@ function UploadWindow ({ imageUrl, setImageUrl }) {
         return (
             <div>
                 <form className={styles.file_upload_wrap} onSubmit={handleClick}>
-                    <label className={styles.filename} htmlFor="file">이미지 파일 선택</label>
-                    <input className={styles.upload_btn} type="file" id="file" onChange={handleFileChange} accept=".jpg, .jpeg, .png" style={{opacity: 0}}/>
+                <input className={styles.upload_btn} type="file" id="file" onChange={handleFileChange} accept=".jpg, .jpeg, .png" style={{opacity: 0}}/>
+                    <label className={styles.filename} htmlFor="file">이미지 업로드</label>
                     <button className={styles.send_btn}>Submit</button>
                 </form>
             </div>
