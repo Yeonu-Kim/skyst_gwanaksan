@@ -4,6 +4,7 @@ python-dotenv
 pandas
 openpyxl
 pillow
+python-multipart
 openai
 requests
 scikit-learn
