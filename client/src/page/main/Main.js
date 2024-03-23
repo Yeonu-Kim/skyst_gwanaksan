@@ -8,7 +8,7 @@ import styles from './Main.module.css';
 const Main = () => {
     const navigate = useNavigate();
 
-    const redirectFace = () => {
+    const redirectKeyword = () => {
         navigate('/keyword')
     }
     return (

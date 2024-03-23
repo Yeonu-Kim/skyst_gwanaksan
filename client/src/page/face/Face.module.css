@@ -1,0 +1,7 @@
+.face_body {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    width: 300px;
+    margin: 5rem auto;
+}

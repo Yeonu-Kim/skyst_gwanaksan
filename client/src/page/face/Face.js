@@ -14,7 +14,7 @@ const Face = () => {
     };
 
     return (
-        <section>
+        <section className={styles.face_body}>
             <div>
                 <SubTitle content={"STEP 1."}/>
                 <Title content={"이상형의 얼굴은?"}/>

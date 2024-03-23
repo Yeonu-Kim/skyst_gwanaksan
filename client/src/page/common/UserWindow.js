@@ -1,18 +1,18 @@
 import React, { useState, useEffect} from "react"
+import styles from "./UserWindow.module.css"
 
 function WindowHeader() {
     console.log("rendered!")
     return (
-        <div>
-            <span>이미지 넣기</span>
+        <div className={styles.window_header}>
         </div>
     );
 }
 
 function WindowLoading () {
     return (
-        <div>
-            <span>Loading...</span>
+        <div className={styles.loading}>
+            <span className={styles.loading_ment}>Loading...</span>
         </div>
     );
 }
@@ -94,7 +94,7 @@ function UploadWindow ({ imageUrl, setImageUrl }) {
     }
 
     return (
-        <section>
+        <section className={styles.window_container}>
             <WindowHeader />
             <UploadInput />
             { imageUrl === "" ? <WindowLoading /> : <WindowResult imageUrl={imageUrl} /> }
@@ -112,8 +112,6 @@ function DiffusionWindow ({ imageUrl, setImageUrl }) {
     }
 
     const handleChange = (event) => {
-        console.log(event.target.value);
-        console.log(command);
         setCommand(event.target.value);
     }
 
@@ -147,12 +145,14 @@ function DiffusionWindow ({ imageUrl, setImageUrl }) {
     }
 
     return (
-        <section>
+        <section className={styles.window_container}>
             <WindowHeader />
-            <form onSubmit={handleClick}>
-                <input value={command} type="text" placeholder="ex. 고양이상의 귀여운 얼굴이 좋아!" onChange={handleChange}/>
-                <span>입력한 텍스트 기반으로 사진을 생성해요</span>
-                <button>Submit</button>
+            <form onSubmit={handleClick} className={styles.window_form}>
+                <textarea className={styles.window_input} value={command} type="textarea" placeholder="ex. 고양이상의 귀여운 얼굴이 좋아!" onChange={handleChange}/>
+                <div className={styles.window_submit}>
+                    <span className={styles.alert}>입력한 텍스트 기반으로 사진을 생성해요</span>
+                    <button className={styles.send_btn}>Submit</button>
+                </div>
             </form>
             { imageUrl === "" ? <WindowLoading /> : <WindowResult imageUrl={imageUrl} /> }
         </section>

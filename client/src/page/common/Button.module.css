@@ -22,6 +22,10 @@
     font-size: 1.2rem;
     font-weight: 800;
   }
+  .radio_btn {
+    display: flex;
+    gap: 0.8rem;
+  }
 
 @media (min-width: 1024px) {
     .button{
