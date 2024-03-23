@@ -11,8 +11,7 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    padding-bottom: 1.8rem;
-
+    padding: 1.8rem 0;
 }
 
 .paragraph{
@@ -20,6 +19,8 @@
     font-style: normal;
     font-weight: 300;
     line-height: normal;
+    padding: 1.8rem;
+
 }
 
 .maintitle {
@@ -44,12 +45,13 @@
     .subtitle{
         font-size: 2rem;
         font-weight: 900;
-        padding-bottom: 3.6rem;
+        padding: 2rem 0;
     }
 
     .paragraph{
-        font-size: 1rem;
+        font-size: 1.8rem;
         font-weight: 600;
+        padding: 1.8rem ;
     }
 
     .maintitle {

@@ -58,8 +58,11 @@ const Result = () => {
                 />
             )}
         <ResultLink text="결과 공유 링크 복사하기" href="" />
+        <div className={styles.resultFooter}>
         <Keywords keywords={keywords} /> 
         <ResultCandidate candidates={candidatesData} />
+        </div>
+        
         </div>
     )
 }
@@ -87,7 +90,7 @@ const ResultLink = ({ text, href }) => {
 const Keywords = ({ keywords }) => {
     return(
         
-        <div>
+        <div className={styles.keywords_wrap}>
             <SubTitle content="키워드" />
             <div className={styles.keywords} >
             {keywords.map(keyword => 
@@ -112,7 +115,7 @@ const ImageComponent = ({ imageUrl, name }) => {
 
 const ResultCandidate = ({ candidates }) => {
     return (
-        <div>
+        <div className={styles.candidates_wrap}>
             <SubTitle content="다른 이상형 후보는?" className={styles.resultName} />
             <div className={styles.candidatesContainer}>
                 {candidates.map((candidate, index) => (

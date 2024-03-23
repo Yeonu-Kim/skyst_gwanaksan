@@ -1,6 +1,12 @@
 
-.resultContainer {
-    margin: 0 4rem;
+
+.resultContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  margin: 5rem auto;
 }
 .resultCard {
     background-color: var(--primary-color);
@@ -22,7 +28,7 @@
 .resultBtn{
     display: flex;
     justify-content: center;
-    
+    text-decoration: none; 
 }
   
 
@@ -30,8 +36,9 @@
   .keywords {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    /* justify-content: center; */
     gap: 1rem;
+    padding: 1.2rem 0;
   }
   
   .keyword {
@@ -40,6 +47,7 @@
     font-weight: 800;
     padding: 5px 10px;
     border-radius: 15px;
+    font-size: 1.2rem;
   }
 
 
@@ -60,11 +68,36 @@
     height: auto; 
     border-radius: 1rem; 
 }
+
 @media (min-width: 1024px) {
   .resultContainer {
-    margin: 0 8rem;
+    width: 70%;
   }
   .resultCard {
-    max-width: 60rem;
+    max-width: 40rem;
   }
+  .result-description {
+    font-size: 4rem;
+  }
+  .keyword{
+    font-size: 1.8rem;
+  }
+  /* .resultFooter{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  } */
+  .resultFooter {
+    display: flex;
+    justify-content: center; 
+    width: 100%; 
+    gap: 20px; 
+    padding-top: 2rem;
+}
+  .keywords_wrap, .candidates_wrap{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
 }
