@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Result.module.css'; 
 import { Title,SubTitle,Paragraph } from '../common/Title';
-import Button  from '../common/Button';
+import { Button }  from '../common/Button';
 
 const candidatesData = [
     {

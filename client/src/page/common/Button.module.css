@@ -6,6 +6,8 @@
     transition: background-color 0.3s, color 0.3s; 
     margin: 1rem;
     flex-shrink: 0;
+    font-family: 'NanumSquare', sans-serif;
+    font-size: 1.2rem;
   }
 
   .button.clicked {
