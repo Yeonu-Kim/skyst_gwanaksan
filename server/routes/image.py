@@ -3,11 +3,6 @@ from fastapi import APIRouter
 from typing import List
 from openai import OpenAI
 import pandas as pd
-import clip
-from PIL import Image
-import torch
-from io import StringIO
-import requests
 from sklearn.metrics.pairwise import cosine_similarity
 
 load_dotenv()
@@ -17,8 +12,16 @@ router = APIRouter()
 client = OpenAI()
 
 
+def get_image_embedding(image_description):
+    response = client.embeddings.create(
+        input=image_description,
+        model="text-embedding-3-large"
+    )
+    return response.data[0].embedding
+
+
 def calculate_similarity(embedding1, embedding2):
-    return cosine_similarity(embedding1, embedding2)[0][0]
+    return cosine_similarity([embedding1], [embedding2])[0][0]
 
 
 @router.post("/")
@@ -32,20 +35,28 @@ async def generate_image_from_prompt(prompt: str, keyword_list: List[dict]):
     )
     image_url = response.data[0].url
 
+    description = client.chat.completions.create(
+        model="gpt-4-vision-preview",
+        messages=[
+            {
+                "role": "user",
+                "content": [
+                    {"type": "text", "text": "Describe the character image in detail"},
+                    {
+                        "type": "image_url",
+                        "image_url": {
+                            "url": image_url,
+                        },
+                    },
+                ],
+            }
+        ],
+        max_tokens=300,
+    ).choices[0]
+
+    image_features = get_image_embedding(description)
+
     df = pd.read_pickle("server/assets/characters.pkl")
-    df["score"] = pd.Series([0] * len(df), index=df.index)
-
-    device = "cuda" if torch.cuda.is_available() else "cpu"
-    model, preprocess = clip.load("ViT-B/32", device=device)
-
-    response = requests.get(image_url, stream=True)
-    response.raw.decode_content = True
-    im = Image.open(response.raw)
-
-    image_input = preprocess(im).unsqueeze(0).to(device)
-    with torch.no_grad():
-        image_features = model.encode_image(image_input)
-
     df["score"] = df["embedding"].apply(lambda x: calculate_similarity(x, image_features))
     df = df[["id", "name", "anime_name", "score"]]
 
