@@ -1,10 +1,8 @@
-import base64
 from dotenv import load_dotenv
 from fastapi import APIRouter
 from typing import List
 from openai import OpenAI
 import pandas as pd
-import requests
 from sklearn.metrics.pairwise import cosine_similarity
 
 load_dotenv()
@@ -43,7 +41,7 @@ async def generate_image_from_prompt(prompt: str, keyword_list: List[dict]):
             {
                 "role": "user",
                 "content": [
-                    {"type": "text", "text": "What’s in this image?"},
+                    {"type": "text", "text": "Describe the character image in detail"},
                     {
                         "type": "image_url",
                         "image_url": {
