@@ -13,5 +13,6 @@ async def calculate_keywords(user_keywords: Keywords):
     df["score"] = pd.Series([0] * len(df), index=df.index)
     for field in Keywords.model_fields:
         df["score"] += df[field].apply(lambda x: x in getattr(user_keywords, field))
+    df = df[["id", "name", "anime_name", "score"]]
     df = df.sort_values("score", ascending=False)
     return df.to_dict(orient="records")

@@ -5,9 +5,11 @@ from PIL import Image
 import torch
 
 from server.routes.keywords import router as keywords_router
+from server.routes.image import router as image_router
 
 app = FastAPI()
 
+app.include_router(image_router, prefix="/image")
 app.include_router(keywords_router, prefix="/keywords")
 
 
@@ -18,7 +20,7 @@ def hello():
 
 @app.on_event("startup")
 def get_features():
-    df = pd.read_csv("server/assets/characters.csv", index_col=0)
+    df = pd.read_csv("server/assets/characters.csv", index_col=False)
     for column in df.columns:
         df[column] = df[column].apply(lambda x: str(x).replace(",", ""))
     df["id"] = range(len(df))
