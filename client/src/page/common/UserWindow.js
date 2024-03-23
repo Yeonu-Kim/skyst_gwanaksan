@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { SendButton } from './Button';
 import styles from "./UserWindow.module.css"
-import button from './Button.module.css'
 
 function WindowHeader() {
     console.log("rendered!")
@@ -32,10 +31,14 @@ function WindowLoading () {
 function WindowResult ({ imageUrl }) {
     const keywordList = JSON.parse(window.sessionStorage.getItem("keyword_list"));
 
-    const navigation = useNavigate();
+    const navigate = useNavigate();
+
+    if (keywordList === null) {
+        navigate('/');
+    }
 
     const redirectResult = () => {
-        navigation('/result');
+        navigate('/result');
     }
 
     const data = {
@@ -100,6 +103,7 @@ function UploadWindow ({ imageUrl, setImageUrl }) {
             <div>
                 <form className={styles.file_upload_wrap} onSubmit={handleClick}>
                     <input className={styles.upload_btn} type="file" id="file" onChange={handleFileChange} accept=".jpg, .jpeg, .png" style={{opacity: 0}}/>
+                    <div style={{color: "var(--black-color)"}}>{(file !== null) && `${file.name} (${(file.size / 1024).toFixed(1)} KB)`}</div>
                     <label className={styles.filename} htmlFor="file">이미지 업로드</label>
                     <button className={styles.send_btn}>Submit</button>
                 </form>

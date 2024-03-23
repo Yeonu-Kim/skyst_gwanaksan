@@ -4,6 +4,7 @@ import styles from './Result.module.css';
 import { Title,SubTitle,Paragraph } from '../common/Title';
 import { Button }  from '../common/Button';
 import exportPNG from './Exportpng.tsx';
+import { useNavigate } from 'react-router-dom';
 const Result = () => {
     const [currentUrl, setCurrentUrl] = useState(''); 
     const [data, setData] = useState([]);
@@ -12,6 +13,10 @@ const Result = () => {
     const [descriptions, setDescriptions] = useState([]);
     const [keywords, setKeywords] = useState([]);
     const [candidatesData, setCandidatesData] = useState([]);
+    const navigate = useNavigate();
+    if (window.sessionStorage.getItem('scores') === null) {
+        navigate('/');
+    }
     useEffect(() => {
 
     const storedScores = window.sessionStorage.getItem('scores');
