@@ -1,8 +1,11 @@
 /* NavBar.module.css */
 .header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: var(--black-color); 
     text-align: center;
-    padding: 1rem 0;
+    height: 80px;
 }
 
 .logo {
