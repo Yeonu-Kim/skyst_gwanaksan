@@ -78,7 +78,7 @@ const RadioButton = ({text1, text2, upperHandle}) => {
   }
 
   return (
-    <div>
+    <div className={styles.radio_btn}>
       <button
         className={firstButtonClasses} 
         onClick={handleClick} 
