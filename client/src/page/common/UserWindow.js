@@ -88,8 +88,8 @@ function UploadWindow ({ imageUrl, setImageUrl }) {
             })
             .then(data => {
                 setImageUrl(data.image_url);
-                window.sessionStorage.setItem(imageUrl);
-                window.sessionStorage.setItem(data.scores);
+                window.sessionStorage.setItem("image_url", imageUrl);
+                window.sessionStorage.setItem("scores", data.scores);
                 console.log(imageUrl);
                 console.log(data.scores);
             })
