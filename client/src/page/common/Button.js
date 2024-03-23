@@ -4,9 +4,9 @@
   import React from 'react';
   import styles from './Button.module.css'; 
   
-  const Button = () => {
+  const Button = ({content}) => {
     return (
-        <button className={styles.button}>Click me</button>
+        <button className={styles.button}>{content}</button>
     );
   };
   
