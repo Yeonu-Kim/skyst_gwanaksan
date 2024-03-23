@@ -41,26 +41,29 @@ function WindowResult ({ imageUrl }) {
     )
 }
 
-function UploadWindow ({ imageUrl }) {
-    function UploadInput () {
-        return (
-            <div>
-                <form>
-                    <input type="file" />
-                    <button>Submit</button>
-                </form>
-            </div>
-        );
-    }
+function UploadInput({}) {
+
+    return (
+        <div>
+            <form>
+                <input type="file"  />
+            </form>
+        </div>
+    );
+}
+
+function UploadWindow({ imageUrl }) {
 
     return (
         <section>
             <WindowHeader />
             <UploadInput />
-            { imageUrl === "" ? <WindowLoading /> : <WindowResult imageUrl={imageUrl} /> }
+            {imageUrl === '' ? <WindowLoading /> : <WindowResult imageUrl={imageUrl} />}
+            <button>Upload</button>
         </section>
-    )
+    );
 }
+
 
 function DiffusionWindow ({ imageUrl, setImageUrl }) {
     const keywordList = JSON.parse(window.sessionStorage.getItem("keyword_list"));
