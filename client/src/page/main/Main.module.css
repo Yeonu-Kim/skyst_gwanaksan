@@ -4,7 +4,7 @@
     width: 300px;
     margin: 0 auto;
     align-items: center;
-    height: calc(100dvh - 180px);
+    height: calc(100vh - 180px);
     flex-direction: column;
     gap: 6rem;
 }
@@ -13,4 +13,23 @@
     background-image: url('../../../public/images/main_background.png');
     background-size: auto 100%;
     background-position-x: 50%;
+} 
+ 
+
+@media (min-width: 1024px) {
+    .main_container {
+        width: 80%; 
+        gap: 10rem; 
+    }
+    .main_background {
+        background-image: url('../../../public/images/main_background.png');
+        background-size: cover; 
+        background-position: center; 
+        height: 100vh; 
+        width: 100vw; 
+        position: fixed; 
+        top: 0;
+        left: 0;
+        z-index: -1; 
+    }
 }

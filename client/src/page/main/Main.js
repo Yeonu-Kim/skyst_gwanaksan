@@ -19,7 +19,7 @@ const Main = () => {
                 <Title content={"Lookalike Optimal with Valued Enchantment"}/>
                 <MainParagraph content={"이상형에 가까운 애니캐릭터 & 버튜버 매칭 서비스"}/>
             </div>
-            <SendButton text={"바로 시작해보자구~ 💛"} onClickFunction={redirectFace} />
+            <SendButton text={"바로 시작해보자구~ 💛"} onClickFunction={redirectFace} className={styles.main_btn}/>
             </div>
         </section>
     )
